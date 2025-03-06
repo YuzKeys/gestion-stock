@@ -1,0 +1,32 @@
+[
+    {
+        "nom": "Smartphone X200",
+        "reference": "1234567890123",
+        "categorie": "Électronique",
+        "quantite": 50
+    },
+    {
+        "nom": "Casque Bluetooth",
+        "reference": "2345678901234",
+        "categorie": "Accessoires",
+        "quantite": 120
+    },
+    {
+        "nom": "Clavier Mécanique",
+        "reference": "3456789012345",
+        "categorie": "Informatique",
+        "quantite": 30
+    },
+    {
+        "nom": "Chaise de Bureau Ergonomique",
+        "reference": "4567890123456",
+        "categorie": "Mobilier",
+        "quantite": 15
+    },
+    {
+        "nom": "Cafetière Expresso",
+        "reference": "5678901234567",
+        "categorie": "Électroménager",
+        "quantite": 40
+    }
+]

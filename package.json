@@ -1,0 +1,35 @@
+{
+  "name": "tfe_demo",
+  "version": "1.0.0",
+  "description": "Réaliser une Web API Restfull qui permet la gestion de stock de produit.",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file=.env app.js",
+    "dev": "node --env-file=.env --watch app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ExpressJS",
+    "NodeJS",
+    "Npm",
+    "JWt",
+    "DigitalCity"
+  ],
+  "author": "Youssef Larbi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.0.1",
+    "mongoose": "^8.12.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuzKeys/gestion-stock.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YuzKeys/gestion-stock/issues"
+  },
+  "homepage": "https://github.com/YuzKeys/gestion-stock#readme"
+}
