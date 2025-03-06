@@ -15,11 +15,30 @@ const productController = {
             res.status(200).json(products) // Retourner tous les produits
 
         } catch (err) {
-            res.status(500).json({ message: "Erreur lors de la recuperation des Produits", error: err });
+            res.status(500).json({ message: 'Cannot get product !', error: err });
         }
     },
+
+    // Obtenir un produit a partir de son id 
     getProductDetailById: async (req, res) => {
-        res.sendStatus(501);
+        const id = req.params.id; // Garder l'ID en tant que string car l'id contient des chiffres et des lettres
+
+        if (!id || typeof id !== 'string') {
+            return res.status(400).json({ error: 'Invalid product ID !' });
+        }
+
+        try {
+            const product = await Product.findById(id);
+
+            if (!product) {
+                return res.status(404).json({ error: 'Product not found !' });
+            }
+
+            return res.status(200).json(new ProductDetailDTO(product));
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: 'Internal Server Error !' });
+        }
     },
 
     // Ajouter des produits
@@ -39,11 +58,11 @@ const productController = {
 
             // Retourner une réponse avec le produit ajouté
             res.status(201).json({
-                message: "Produit ajouté avec succès",
+                message: "Product Added !",
                 product: savedProduct
             });
         } catch (err) {
-            res.status(500).json({ message: "Erreur lors de l'ajout du produit", error: err });
+            res.status(500).json({ message: "Cannot add product", error: err });
         }
     }
 
