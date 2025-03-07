@@ -1,5 +1,5 @@
 import { ProductDetailDTO, ProductDTO } from '../DTO/product.dto.js'
-import Product from "../models/Product.js";
+import Product from "../models//product.model.js";
 
 const productController = {
 
@@ -7,10 +7,14 @@ const productController = {
     getAllProducts: async (req, res) => {
         // Gestion de la pagination //! /api/product?offset=2&limit=2
         const { offset, limit } = req.pagination;
+        console.log(offset, limit);
+
 
         // Récuperation des produits en DTO avec Gestion d'erreur en cas d'echec
         try {
-            const productList = await Product.find(); //Trouver Tous les produits
+            const productList = await Product.find(null, null, {
+                skip: offset, limit
+            }); //Trouver Tous les produits
             const products = productList.map(p => new ProductDTO(p)); //Mapping et renvoie des produits en DTO
             res.status(200).json(products) // Retourner tous les produits
 
@@ -64,7 +68,44 @@ const productController = {
         } catch (err) {
             res.status(500).json({ message: "Cannot add product", error: err });
         }
+    },
+    // Modifier un produit existant
+    updateProduct: async (req, res) => {
+        const { id } = req.params; // ID du produit à modifier
+        const { nom, reference, description, categorie, quantite } = req.body; // Récupération des nouvelles données
+
+        if (!id || typeof id !== 'string') {
+            return res.status(400).json({ error: 'Invalid product ID !' });
+        }
+
+        try {
+            // Chercher le produit existant dans la base de données
+            const product = await Product.findById(id);
+
+            if (!product) {
+                return res.status(404).json({ error: 'Product not found !' });
+            }
+
+            // Mettre à jour les propriétés du produit
+            product.nom = nom || product.nom;
+            product.reference = reference || product.reference;
+            product.description = description || product.description;
+            product.categorie = categorie || product.categorie;
+            product.quantite = quantite || product.quantite;
+
+            // Sauvegarder les modifications dans la base de données
+            const updatedProduct = await product.save();
+
+            // Retourner une réponse avec le produit mis à jour
+            res.status(200).json({
+                message: "Product updated successfully !",
+                product: updatedProduct
+            });
+        } catch (err) {
+            res.status(500).json({ message: "Cannot update product", error: err });
+        }
     }
+
 
 }
 
