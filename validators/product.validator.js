@@ -1,7 +1,10 @@
 import { z } from 'zod';
 
 export const ProductSchema = z.object({
-    nom: z.string()
+    nom: z.string({
+        invalid_type_error: '',
+        required_error: ''
+    })
         .min(3, { message: "Le nom doit contenir au moins 3 caractères." })
         .max(50, { message: "Le nom ne doit pas dépasser 50 caractères." })
         .trim(),
