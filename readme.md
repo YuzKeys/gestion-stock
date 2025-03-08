@@ -2,7 +2,7 @@
 
 Réaliser une Web API Restfull qui permet la gestion de stock de produit.
 
-$\scriptsize\color{gray}{\textsf{NB : Le client (votre formateur 😅) peut modifier la demande à tout moment !}}$
+$\scriptsize\color{gray}{\textsf{NB : Le client peut modifier la demande à tout moment !}}$
 
 ## Contraintes technique
 - Utilisation du framework « Express JS » en version 5
